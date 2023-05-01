@@ -69,6 +69,7 @@ class Main():
         app.trade_record_df = trade_record_df
         app.dividends_df = dividends_df
         value_record_df = app.launch()
+        # return history_df, dividends_df
 
         app = Summary()
         app.code = self.code

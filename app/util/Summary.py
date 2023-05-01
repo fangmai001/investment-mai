@@ -29,9 +29,9 @@ class Summary():
         ax.plot(self.value_record_df["total_cost"], label="total_cost")
         ax.plot(self.value_record_df["total_cost_with_dividend"], label="total_cost_with_dividend")
         # ax.plot(history["Close"], label="Close")
-        # ax.legend(loc="upper left")
+        ax.legend(loc="upper left")
         ax.set_xlabel("Date")
-        ax.set_ylabel("USD")
+        ax.set_ylabel("$")
 
         plt.show()
 
@@ -41,14 +41,15 @@ class Summary():
         ax.plot([ 0 for _ in range(self.value_record_df.index.size)], label="profit_rate")
         ax.plot(self.value_record_df["profit_rate"], label="profit_rate")
         ax.plot(self.value_record_df["profit_rate_with_dividend"], label="profit_rate_with_out")
+        ax.legend(loc="upper left")
         ax.set_xlabel("Date")
         ax.set_ylabel("Profit Rate(%)")
 
         plt.show()
 
     def __export_csv(self) -> None:
-        self.trade_record_df.to_csv('export/trade_record_df.csv')
-        self.value_record_df.to_csv('export/value_record_df.csv')
+        self.trade_record_df.to_csv(f'export/trade_record_df({self.code}).csv')
+        self.value_record_df.to_csv(f'export/value_record_df({self.code}).csv')
 
     def launch(self) -> None:
         self.__print_log()

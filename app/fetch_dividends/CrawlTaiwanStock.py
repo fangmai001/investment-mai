@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 import numpy as np
 import pandas as pd
@@ -33,8 +34,11 @@ class CrawlTaiwanStock():
                 list_rows.append(np.array(row_td)[[3, 14, 17]])
         df = pd.DataFrame(list_rows, columns = ['date', 'dividends', 'split'] )
         df['date'] = df['date'].apply(lambda s: datetime.strptime(s, "%y'%m/%d"))
+        df['date'] = df['date'].apply(lambda s: s.date())
         df['dividends'] = df['dividends'].apply(lambda s: float(s))
         df['split'] = df['split'].apply(lambda s: float(s))
+
+        df.to_csv(f"import/dividends_{self.code}_{self.start_date}_{self.end_date}.csv")
         return df
 
     def launch(self) -> pd.DataFrame:
@@ -43,5 +47,12 @@ class CrawlTaiwanStock():
 
         :return: DataFrame
         """
-        dataset = self.__crawl_goodinfo()
+
+        filepath = f"import/dividends_{self.code}_{self.start_date}_{self.end_date}.csv"
+        if os.path.isfile(filepath):
+            dataset = pd.read_csv(filepath, index_col=[0])
+            dataset['date'] = dataset['date'].apply(lambda s: datetime.strptime(s, "%Y-%m-%d"))
+            dataset['date'] = dataset['date'].apply(lambda s: s.date())
+        else:
+            dataset = self.__crawl_goodinfo()
         return dataset
