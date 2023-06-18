@@ -53,6 +53,6 @@ class Summary():
 
     def launch(self) -> None:
         self.__print_log()
-        self.__value_vs_cost()
-        self.__profit()
+        # self.__value_vs_cost()
+        # self.__profit()
         self.__export_csv()

@@ -1,12 +1,6 @@
-from datetime import timedelta
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import yfinance as yf
 import requests
-from bs4 import BeautifulSoup
 
 class Fund():
 

@@ -40,6 +40,8 @@ class Main():
             app = CrawlTaiwanStock()
         if self.code == 'VWRD.L':
             app = StaticVWRD()
+        if self.is_fund:
+            return pd.DataFrame({'date': [], 'dividends': []})
 
         app.code = self.code
         app.start_date = self.start_date
