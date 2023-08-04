@@ -23,7 +23,7 @@ class CrawlTaiwanETF():
 
         for row in rows:
             row_td = [i.text for i in row.find_all('td')]
-            if len(row_td)>1:
+            if len(row_td) > 1:
                 list_rows.append(np.array(row_td)[[1, 6]])
 
         df = pd.DataFrame(list_rows, columns = ['date', 'dividends'] )

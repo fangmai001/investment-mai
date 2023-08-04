@@ -33,6 +33,10 @@ class CrawlTaiwanStock():
                 # print(row_td)
                 list_rows.append(np.array(row_td)[[3, 14, 17]])
         df = pd.DataFrame(list_rows, columns = ['date', 'dividends', 'split'] )
+
+        # 排除那種「即將除息」等非日期字元
+        df['date'] = df['date'].apply(lambda s: s[:8])
+
         df['date'] = df['date'].apply(lambda s: datetime.strptime(s, "%y'%m/%d"))
         df['date'] = df['date'].apply(lambda s: s.date())
         df['dividends'] = df['dividends'].apply(lambda s: float(s))
