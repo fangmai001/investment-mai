@@ -12,6 +12,7 @@ tejapi = "*"
 requests = "*"
 beautifulsoup4 = "*"
 openpyxl = "*"
+streamlit = "*"
 
 [dev-packages]
 ipykernel = "*"

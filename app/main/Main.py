@@ -86,6 +86,10 @@ class Main():
         app.end_date = self.end_date
         app.trade_record_df = trade_record_df
         app.value_record_df = value_record_df
-        app.launch()
+        result_summary_str = app.launch()
 
-        # return trade_record_df, value_record_df
+        return {
+            'trade_record_df': trade_record_df,
+            'value_record_df': value_record_df,
+            'result_summary_str': result_summary_str
+        }

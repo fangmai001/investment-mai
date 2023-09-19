@@ -13,7 +13,7 @@ class Stock():
         stock = yf.Ticker(self.code)
         dataset = stock.history(start=self.start_date, end=self.end_date)
         dataset = dataset.reset_index()
-        dataset['Date'] = dataset['Date'].apply(lambda a: a.date)
+        dataset['Date'] = dataset['Date'].apply(lambda a: a.date())
         dataset = self.__format_dataset(dataset)
         return dataset
 
