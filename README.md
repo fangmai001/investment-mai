@@ -8,8 +8,8 @@
 
 ### 啟動 streamlit
 
-`streamlit run streamlit_app.py`
-
 `pipenv run streamlit run streamlit_app.py`
 
-streamlit run your_script.py [-- script args]
+### 匯出 requirements
+
+`pipenv requirements > requirements.txt`
