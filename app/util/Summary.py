@@ -26,9 +26,9 @@ class Summary():
         result_summary_str = result_summary_str + '\n'
         result_summary_str = result_summary_str + f"總報酬(含息): {np.round(final_profit_rate_with_dividend * 100, 2)}%"
         result_summary_str = result_summary_str + '\n'
-        result_summary_str = result_summary_str + f"總收入: {np.round(final_income, 0)}$"
+        result_summary_str = result_summary_str + f"總損益: {'{:,.0f}$'.format(final_income)}"
         result_summary_str = result_summary_str + '\n'
-        result_summary_str = result_summary_str + f"總支出: {np.round(total_cost, 0)}$"
+        result_summary_str = result_summary_str + f"總投資金額: {'{:,.0f}$'.format(total_cost)}$"
         result_summary_str = result_summary_str + '\n'
         return result_summary_str
 
@@ -67,7 +67,7 @@ class Summary():
     def launch(self) -> str:
         log = ''
         log = log + self.__print_log()
-        # self.__value_vs_cost()
-        # self.__profit()
+        self.__value_vs_cost()
+        self.__profit()
         # self.__export_csv()
         return log

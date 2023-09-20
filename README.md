@@ -1,6 +1,6 @@
-# investment-calculation-mai
+# investment-mai
 
-只是一個投資試算工具，僅供參考
+股票定期定額回測的模擬器
 
 ### 安裝
 
@@ -9,7 +9,3 @@
 ### 啟動 streamlit
 
 `pipenv run streamlit run streamlit_app.py`
-
-### 匯出 requirements
-
-`pipenv requirements > requirements.txt`

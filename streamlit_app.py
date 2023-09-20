@@ -20,6 +20,7 @@ consider_tax = False
 st.title('股票定期定額模擬器💵')
 st.caption('股票定期定額回測的模擬器。')
 st.caption('*~~早知當初... 都有定期定額買，現在會怎麼樣🥲~~*')
+st.caption('免責聲明：這只是個投資試算工具，僅供參考')
 
 # ==================== 基本設定 ====================
 
@@ -39,12 +40,6 @@ end_date = st.text_input("結束時間", default_end_date)
 
 investment_amount = st.number_input('每次定期定額投資金額', value=10000)
 purchase_day = st.number_input('每月第 N 個交易天進行交易', value=1)
-
-# is_fund = st.checkbox('是否為基金？', False)
-# using_taiwan_stock_crawl = st.checkbox('使用台股爬蟲(goodinfo.tw)？', True)
-# using_taiwan_etf_crawl = st.checkbox('使用台股ETF爬蟲(www.moneydj.com)？', False)
-# using_yf = st.checkbox('使用 Yahoo 股市API(使用美股需開啟)？', False)
-# consider_tax = st.checkbox('考量到美股股息稅(使用美股需開啟)？', False)
 
 # ==================== 選擇股票 ====================
 
@@ -118,7 +113,6 @@ if mode_str == '自行填寫代號(美股)':
 
 # ==================== 開始試算 ====================
 if st.button('開始試算'):
-    st.write("使用代號: ", code)
 
     app = Main()
     app.code = code # 股票代碼
@@ -139,7 +133,29 @@ if st.button('開始試算'):
 
     st.write("試算結果: ")
     st.text(result_summary_str)
-    st.write("歷史成交模擬: ")
+
+    st.write("股票價值成長折線圖: ")
+    chart_df = pd.DataFrame({
+        '股票價值': value_record_df["total_value"],
+        '股票成本': value_record_df["total_cost"],
+        '股票成本(扣除股息)': value_record_df["total_cost_with_dividend"],
+    })
+    st.line_chart(chart_df)
+
+    st.write("投資損益成長折線圖: ")
+    chart_data = pd.DataFrame({
+        '數字零位置': [ 0 for _ in range(value_record_df.index.size)],
+        '投資損益': value_record_df["profit_rate"],
+        '投資損益(含股息)': value_record_df["profit_rate_with_dividend"],
+    })
+    st.line_chart(chart_data)
+
+    st.write("成交紀錄: ")
     st.dataframe(trade_record_df)
-    st.write("歷史價值模擬: ")
+
+    st.write("歷史價值: ")
     st.dataframe(value_record_df)
+
+# st.subheader('TODO', divider=True)
+# st.text('1. 說明方式計算。')
+# st.text('2. 確認台股股價，似乎在股票股息計算價格會有問題。')
