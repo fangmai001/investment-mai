@@ -31,6 +31,8 @@ purchase_day = st.number_input('每月第 N 個交易天進行交易', value=1)
 is_fund = st.checkbox('是否為基金？', False)
 using_taiwan_stock_crawl = st.checkbox('使用台股爬蟲(goodinfo.tw)？', True)
 using_taiwan_etf_crawl = st.checkbox('使用台股ETF爬蟲(www.moneydj.com)？', False)
+using_yf = st.checkbox('使用 Yahoo 股市API(使用美股需開啟)？', False)
+consider_tax = st.checkbox('考量到美股股息稅(使用美股需開啟)？', False)
 
 if st.button('開始試算'):
     if text_input:
@@ -51,6 +53,8 @@ if st.button('開始試算'):
     app.is_fund = is_fund
     app.using_taiwan_stock_crawl = using_taiwan_stock_crawl
     app.using_taiwan_etf_crawl = using_taiwan_etf_crawl
+    app.using_yf = using_yf
+    app.consider_tax = consider_tax
 
     result_dict = app.launch()
     result_summary_str = result_dict['result_summary_str']
