@@ -67,7 +67,7 @@ class Summary():
     def launch(self) -> str:
         log = ''
         log = log + self.__print_log()
-        self.__value_vs_cost()
-        self.__profit()
+        # self.__value_vs_cost()
+        # self.__profit()
         # self.__export_csv()
         return log

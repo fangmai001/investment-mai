@@ -35,9 +35,12 @@ class CrawlTaiwanStock():
         df = pd.DataFrame(list_rows, columns = ['date', 'dividends', 'split'] )
 
         # 排除那種「即將除息」等非日期字元
-        df['date'] = df['date'].apply(lambda s: s[:8])
+        # df['date'] = df['date'].apply(lambda s: s[:8])
 
-        df['date'] = df['date'].apply(lambda s: datetime.strptime(s, "%y'%m/%d"))
+        # fix(2024/03/10): 字元數量有調整
+        df['date'] = df['date'].apply(lambda s: s[:9])
+
+        df['date'] = df['date'].apply(lambda s: datetime.strptime(s, "'%y/%m/%d"))
         df['date'] = df['date'].apply(lambda s: s.date())
         df['dividends'] = df['dividends'].apply(lambda s: float(s))
         df['split'] = df['split'].apply(lambda s: float(s))
